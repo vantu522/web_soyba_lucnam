@@ -56,6 +56,9 @@ const HealthRecordList = ({
                       STT
                     </th>
                     <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-left text-xs sm:text-sm font-semibold text-green-800 uppercase tracking-wider">
+                      Họ tên
+                    </th>
+                    <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-left text-xs sm:text-sm font-semibold text-green-800 uppercase tracking-wider">
                       Ngày khám
                     </th>
                     <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-left text-xs sm:text-sm font-semibold text-green-800 uppercase tracking-wider hidden sm:table-cell">
@@ -77,6 +80,9 @@ const HealthRecordList = ({
                     >
                       <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
                         {index + 1}
+                      </td>
+                       <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+                        {record.HO_TEN}
                       </td>
                       <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 whitespace-nowrap">
                         <div className="flex items-center">

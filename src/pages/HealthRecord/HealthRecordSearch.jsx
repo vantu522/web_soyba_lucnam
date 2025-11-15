@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Search, FileText } from "lucide-react";
+import { Lock, Eye, EyeOff } from "lucide-react";
 import logo from "../../assets/logo.jpg"
-const HealthRecordSearch = ({ onSearch, loading, error }) => {
-  const [searchCCCD, setSearchCCCD] = useState("");
+
+const HealthRecordSearch = ({ onLogin, loading, error }) => {
+  const [cccd, setCccd] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (searchCCCD.trim()) {
-      onSearch(searchCCCD.trim());
+    if (cccd.trim() && password.trim()) {
+      onLogin(cccd.trim(), password.trim());
     }
   };
 
@@ -21,10 +24,10 @@ const HealthRecordSearch = ({ onSearch, loading, error }) => {
             className="mx-auto mb-4 sm:mb-6 w-24 h-24 sm:w-32 sm:h-32 object-contain"
           />
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
-            Tra cứu Sổ Y bạ Điện tử
+            Đăng nhập Sổ Y bạ Điện tử
           </h1>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-2">
-            Nhập mã tra cứu để xem lịch sử khám bệnh và thông tin y tế của bạn
+            Đăng nhập để xem lịch sử khám bệnh và thông tin y tế của bạn
           </p>
         </div>
 
@@ -38,18 +41,43 @@ const HealthRecordSearch = ({ onSearch, loading, error }) => {
               )}
               <div className="mb-4 sm:mb-6">
                 <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-                  Mã tra cứu
+                  Số CCCD
                 </label>
                 <div className="relative">
                   <input
                     type="text"
-                    value={searchCCCD}
-                    onChange={(e) => setSearchCCCD(e.target.value)}
-                    placeholder="Nhập mã tra cứu của bạn..."
+                    value={cccd}
+                    onChange={(e) => setCccd(e.target.value)}
+                    placeholder="Nhập số CCCD của bạn..."
                     className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl  focus:ring-0 transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="mb-4 sm:mb-6">
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+                  Mật khẩu
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Nhập mật khẩu của bạn..."
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl  focus:ring-0 transition-colors pr-12"
                     onKeyPress={(e) => e.key === "Enter" && handleSubmit(e)}
                   />
-                  <Search className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 sm:w-6 sm:h-6" />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5 sm:w-6 sm:h-6" />
+                    ) : (
+                      <Eye className="w-5 h-5 sm:w-6 sm:h-6" />
+                    )}
+                  </button>
                 </div>
               </div>
 
@@ -84,20 +112,8 @@ const HealthRecordSearch = ({ onSearch, loading, error }) => {
                   </div>
                 ) : (
                   <div className="flex items-center cursor-pointer justify-center">
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                    Tìm kiếm hồ sơ
+                    <Lock className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+                    Đăng nhập
                   </div>
                 )}
               </button>
@@ -106,7 +122,7 @@ const HealthRecordSearch = ({ onSearch, loading, error }) => {
 
           <div className="mt-6 sm:mt-8 text-center">
             <p className="text-xs sm:text-sm text-gray-500 px-2">
-              Mã tra cứu được cung cấp tại các cơ sở y tế sau khi khám bệnh
+              Tài khoản được cung cấp tại các cơ sở y tế sau khi khám bệnh
             </p>
           </div>
         </div>

@@ -157,7 +157,7 @@ const HealthRecordDetail = ({ selectedRecord, onBack }) => {
         const day = dateString.substring(6, 8);
         const hour = dateString.substring(8, 10);
         const minute = dateString.substring(10, 12);
-        return `${day}/${month}/${year} ${hour}:${minute}`;
+        return `${day}/${month}/${year} `;
       }
       return dateString;
     } catch {
@@ -346,6 +346,14 @@ const HealthRecordDetail = ({ selectedRecord, onBack }) => {
                     </label>
                     <p className="text-sm sm:text-base md:text-lg text-gray-800">
                       {detailData?.MA_THE_BHYT || "Chưa có thông tin"}
+                    </p>
+                  </div>
+                   <div>
+                    <label className="text-xs sm:text-sm font-medium text-gray-500">
+                      Mã bệnh nhân
+                    </label>
+                    <p className="text-sm sm:text-base md:text-lg text-gray-800">
+                      {detailData?.MA_BN || "Chưa có thông tin"}
                     </p>
                   </div>
                   <div>
