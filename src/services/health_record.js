@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getHealthRecordsListByCCCD = async (cccd) => {
   try {
-    const response = await axios.get(`https://bvdk333.work/api/yba?cccd=${cccd}`);
+    const response = await axios.get(`http://localhost:1106/api/yba?cccd=${cccd}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching health records:", error);
@@ -12,7 +12,7 @@ export const getHealthRecordsListByCCCD = async (cccd) => {
 
 export const getHealthRecordByCCCDAndLK = async (cccd, ma_lk) => {
   try {
-    const response = await axios.get(`https://bvdk333.work/api/yba/kq?cccd=${cccd}&ma_lk=${ma_lk}`);
+    const response = await axios.get(`http://localhost:1106/api/yba/kq?cccd=${cccd}&ma_lk=${ma_lk}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching health record by CCCD and LK:", error);

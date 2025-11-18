@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const loginUser = async (cccd, password) => {
   try {
-    const response = await axios.post('https://bvdk333.work/api/auth/login', {
+    const response = await axios.post('http://localhost:1106/api/auth/login', {
       cccd,
       password
     });
@@ -15,7 +15,7 @@ export const loginUser = async (cccd, password) => {
 
 export const changePassword = async (cccd, newPassword, token) => {
   try {
-    const response = await axios.post('https://bvdk333.work/api/auth/change-password', {
+    const response = await axios.post('http://localhost:1106/api/auth/change-password', {
       cccd,
       newPassword
     }, {
