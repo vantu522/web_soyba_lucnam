@@ -27,20 +27,34 @@ const HealthRecordLookup = () => {
         setCccd(cccdInput);
         
         // Lưu token từ response
-        if (res.token || res.data?.token) {
-          const accessToken = res.token || res.data?.token;
+        let accessToken = "";
+        if (res.token) {
+          accessToken = res.token;
+        } else if (res.data?.token) {
+          accessToken = res.data.token;
+        }
+        
+        if (accessToken) {
           setToken(accessToken);
           // Lưu token vào localStorage để sử dụng cho các API khác
           localStorage.setItem('accessToken', accessToken);
         }
         
-        // Kiểm tra nếu là người dùng mới
+        // Kiểm tra nếu là người dùng mới hoặc cần đổi mật khẩu
+        console.log("mustChangePassword:", res.user?.mustChangePassword);
+        console.log("isNewUser:", res.user?.isNewUser);
+        console.log("accessToken:", accessToken);
+        
         if (res.user?.mustChangePassword === false || res.data?.isNewUser === true) {
           setCurrentView("changePassword");
           toast.info("Vui lòng đổi mật khẩu để tiếp tục");
         } else {
-          // Đăng nhập thành công, lấy danh sách hồ sơ
-          await fetchHealthRecords(cccdInput);
+          // Đăng nhập thành công, lấy danh sách hồ sơ với token
+          if (accessToken) {
+            await fetchHealthRecords(cccdInput, accessToken);
+          } else {
+            toast.error("Không thể lấy token từ server");
+          }
         }
       } else {
         setError(res?.message || "Đăng nhập không thành công");
@@ -56,10 +70,10 @@ const HealthRecordLookup = () => {
     }
   };
 
-  const fetchHealthRecords = async (cccdInput) => {
+  const fetchHealthRecords = async (cccdInput, accessToken) => {
     setLoading(true);
     try {
-      const res = await getHealthRecordsListByCCCD(cccdInput);
+      const res = await getHealthRecordsListByCCCD(cccdInput, accessToken);
 
       if (res && res?.data && res?.data.length > 0) {
         setHealthRecords(res.data);
@@ -85,7 +99,7 @@ const HealthRecordLookup = () => {
   const handlePasswordChanged = async () => {
     toast.success("Đổi mật khẩu thành công!");
     // Sau khi đổi mật khẩu thành công, lấy danh sách hồ sơ
-    await fetchHealthRecords(cccd);
+    await fetchHealthRecords(cccd, token);
   };
 
   const handleBackToLogin = () => {
@@ -140,6 +154,7 @@ const HealthRecordLookup = () => {
       {currentView === "detail" && (
         <HealthRecordDetail
           selectedRecord={selectedRecord}
+          token={token}
           onBack={handleBackToList}
         />
       )}

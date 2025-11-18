@@ -15,7 +15,7 @@ import {
 import { getHealthRecordByCCCDAndLK } from "../../services/health_record";
 import { toast } from "react-toastify";
 
-const HealthRecordDetail = ({ selectedRecord, onBack }) => {
+const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
   const [detailData, setDetailData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,7 +35,8 @@ const HealthRecordDetail = ({ selectedRecord, onBack }) => {
       try {
         const response = await getHealthRecordByCCCDAndLK(
           selectedRecord.SO_CCCD,
-          selectedRecord.MA_LK
+          selectedRecord.MA_LK,
+          token
         );
 
         if (
