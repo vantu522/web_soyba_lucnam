@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { API_URL } from "../configs/constants";
 export const getHealthRecordsListByCCCD = async ( token) => {
   try {
     const headers = {};
