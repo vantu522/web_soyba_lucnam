@@ -1,8 +1,9 @@
 import axios from "axios";
+import { API_URL } from "../configs/constants";
 
 export const loginUser = async (identifier, password) => {
   try {
-    const response = await axios.post('https://bvdk333.work/api/customers/login', {
+    const response = await axios.post(`${API_URL}/customers/login`, {
       identifier,
       password
     });
@@ -15,7 +16,7 @@ export const loginUser = async (identifier, password) => {
 
 export const changePassword = async (identifier, newPassword, token) => {
   try {
-    const response = await axios.post('https://bvdk333.work/api/customers/change-password', {
+    const response = await axios.post(`${API_URL}/customers/change-password`, {
       identifier,
       newPassword
     }, {
