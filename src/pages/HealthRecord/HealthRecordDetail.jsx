@@ -34,7 +34,6 @@ const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
 
       try {
         const response = await getHealthRecordByCCCDAndLK(
-          selectedRecord.SO_CCCD,
           selectedRecord.MA_LK,
           token
         );

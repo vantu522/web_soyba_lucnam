@@ -51,7 +51,7 @@ const HealthRecordLookup = () => {
         } else {
           // Đăng nhập thành công, lấy danh sách hồ sơ với token
           if (accessToken) {
-            await fetchHealthRecords(cccdInput, accessToken);
+            await fetchHealthRecords( accessToken);
           } else {
             toast.error("Không thể lấy token từ server");
           }
@@ -70,10 +70,10 @@ const HealthRecordLookup = () => {
     }
   };
 
-  const fetchHealthRecords = async (cccdInput, accessToken) => {
+  const fetchHealthRecords = async (accessToken) => {
     setLoading(true);
     try {
-      const res = await getHealthRecordsListByCCCD(cccdInput, accessToken);
+      const res = await getHealthRecordsListByCCCD( accessToken);
 
       if (res && res?.data && res?.data.length > 0) {
         setHealthRecords(res.data);
