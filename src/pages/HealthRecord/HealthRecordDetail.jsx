@@ -14,11 +14,18 @@ import {
 } from "lucide-react";
 import { getHealthRecordByCCCDAndLK } from "../../services/health_record";
 import { toast } from "react-toastify";
-
+import {
+  formatDate,
+  formatCurrency,
+  formatGender,
+  formatMedicalDateTime,
+} from "../../utils/format";
+import PDFModalViewer from "../../components/PdfModal";
 const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
   const [detailData, setDetailData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
 
   // Gọi API để lấy chi tiết khi component mount
   useEffect(() => {
@@ -140,68 +147,6 @@ const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
 
     fetchDetailData();
   }, [selectedRecord]);
-
-  // Helper functions để format dữ liệu
-  const formatDate = (dateString) => {
-    if (!dateString) return "Chưa có thông tin";
-    try {
-      // Format từ YYYYMMDD hoặc YYYYMMDDHHmm
-      if (dateString.length === 8) {
-        const year = dateString.substring(0, 4);
-        const month = dateString.substring(4, 6);
-        const day = dateString.substring(6, 8);
-        return `${day}/${month}/${year}`;
-      } else if (dateString.length === 12) {
-        const year = dateString.substring(0, 4);
-        const month = dateString.substring(4, 6);
-        const day = dateString.substring(6, 8);
-        const hour = dateString.substring(8, 10);
-        const minute = dateString.substring(10, 12);
-        return `${day}/${month}/${year} `;
-      }
-      return dateString;
-    } catch {
-      return dateString;
-    }
-  };
-
-  const formatGender = (genderCode) => {
-    switch (genderCode) {
-      case "1":
-        return "Nam";
-      case "2":
-        return "Nữ";
-      default:
-        return "Chưa có thông tin";
-    }
-  };
-
-  // Helper function để format số tiền
-  const formatCurrency = (amount) => {
-    if (!amount || amount === "0") return "0 VNĐ";
-    return new Intl.NumberFormat("vi-VN", {
-      style: "currency",
-      currency: "VND",
-    }).format(amount);
-  };
-
-  // Helper function để format ngày giờ y tế
-  const formatMedicalDateTime = (dateString) => {
-    if (!dateString) return "Chưa có thông tin";
-    try {
-      if (dateString.length === 12) {
-        const year = dateString.substring(0, 4);
-        const month = dateString.substring(4, 6);
-        const day = dateString.substring(6, 8);
-        const hour = dateString.substring(8, 10);
-        const minute = dateString.substring(10, 12);
-        return `${day}/${month}/${year} ${hour}:${minute}`;
-      }
-      return dateString;
-    } catch {
-      return dateString;
-    }
-  };
 
   // Loading state
   if (loading) {
@@ -348,7 +293,7 @@ const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
                       {detailData?.MA_THE_BHYT || "Chưa có thông tin"}
                     </p>
                   </div>
-                   <div>
+                  <div>
                     <label className="text-xs sm:text-sm font-medium text-gray-500">
                       Mã bệnh nhân
                     </label>
@@ -385,50 +330,10 @@ const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
             </div>
           </div>
 
-           {/*  TÀI LIỆU ĐÍNH KÈM (PDF) */}
+          {/*  TÀI LIỆU ĐÍNH KÈM (PDF) */}
+
           {detailData?.pdfFiles && detailData.pdfFiles.length > 0 && (
-            <div className="bg-white rounded-lg sm:rounded-xl shadow-md border border-gray-100">
-              <div className="bg-gray-600 text-white px-3 sm:px-6 py-3 sm:py-4 rounded-t-lg sm:rounded-t-xl">
-                <div className="flex items-center">
-                  <FileText className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold">
-                     TÀI LIỆU ĐÍNH KÈM
-                  </h3>
-                </div>
-              </div>
-              <div className="p-3 sm:p-4 md:p-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                  {detailData.pdfFiles.map((file, index) => (
-                    <a
-                      key={index}
-                      href={file.Url}
-                      target="_blank"
-                      onClick={(e) => {
-                        // fallback cho mobile nếu không mở được tab mới
-                        if (window.innerWidth < 768) {
-                          window.location.href = file.Url;
-                        }
-                      }}
-                      rel="noopener noreferrer"
-                      className="flex items-center p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-pink-500 hover:bg-pink-50 transition-all group"
-                    >
-                      <div className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-200 transition-colors">
-                        <Download className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600" />
-                      </div>
-                      <div className="ml-3 flex-1 min-w-0">
-                        <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">
-                          {file.TenNhom}
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {new Date(file.NgayTao).toLocaleDateString("vi-VN")}
-                        </p>
-                      </div>
-                      <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-pink-600 shrink-0 ml-2" />
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <PDFModalViewer files={detailData.pdfFiles} />
           )}
 
           {/* II. THÔNG TIN THUỐC (XML2) */}
@@ -816,8 +721,6 @@ const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
               </div>
             </div>
           )}
-
-         
         </div>
       </div>
     </div>
