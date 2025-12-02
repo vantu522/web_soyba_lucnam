@@ -13,9 +13,29 @@ export default function PDFModalViewer({ files = [] }) {
   const [open, setOpen] = useState(false);
   const [pdfUrl, setPdfUrl] = useState(null);
 
+  // Phát hiện thiết bị mobile
+  const isMobile = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  };
+
+  // Phát hiện iOS
+  const isIOS = () => {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent);
+  };
+
   const openModal = (url) => {
-    setPdfUrl(url);
-    setOpen(true);
+    // Nếu là iOS, dùng modal như bình thường
+    if (isIOS()) {
+      setPdfUrl(url);
+      setOpen(true);
+    } else if (isMobile()) {
+      // Android và mobile khác: mở trong tab hiện tại
+      window.location.href = url;
+    } else {
+      // Desktop: dùng modal
+      setPdfUrl(url);
+      setOpen(true);
+    }
   };
 
   const closeModal = () => {
@@ -30,8 +50,7 @@ export default function PDFModalViewer({ files = [] }) {
         {files.map((file, index) => (
           <div
             key={index}
-            onClick={() => openModal(file.Url)}
-            className="cursor-pointer flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-pink-500 hover:bg-pink-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-pink-500 hover:bg-pink-50 transition-all group"
           >
             <div className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-200 transition-colors">
               <Download className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600" />
@@ -42,7 +61,26 @@ export default function PDFModalViewer({ files = [] }) {
                 {new Date(file.NgayTao).toLocaleDateString("vi-VN")}
               </p>
             </div>
-            <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-pink-600 shrink-0 ml-2" />
+            <div className="flex gap-2 ml-2">
+              {/* Nút xem (Modal cho iOS/Desktop, redirect cho Android) */}
+              <button
+                onClick={() => openModal(file.Url)}
+                className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg"
+                title="Xem PDF"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </button>
+              {/* Nút tải xuống */}
+              <a
+                href={file.Url}
+                download
+                className="p-2 text-green-600 hover:bg-green-100 rounded-lg"
+                title="Tải xuống"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Download className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         ))}
       </div>
@@ -63,10 +101,28 @@ export default function PDFModalViewer({ files = [] }) {
             </div>
 
             {/* PDF Viewer */}
-            <iframe
-              src={pdfUrl}
-              className="w-full flex-1"
-            />
+            <div className="flex-1 relative">
+              <iframe
+                src={pdfUrl}
+                className="w-full h-full border-0"
+                title="PDF Viewer"
+              />
+              {/* Fallback cho trình duyệt không hỗ trợ iframe PDF */}
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-100" style={{ zIndex: -1 }}>
+                <div className="text-center p-4">
+                  <p className="text-gray-600 mb-3">Không thể xem PDF trong trình duyệt này</p>
+                  <a 
+                    href={pdfUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Tải xuống PDF
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
