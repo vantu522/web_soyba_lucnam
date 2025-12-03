@@ -1,12 +1,13 @@
 import axios from "axios";
 import { API_URL } from "../configs/constants";
-export const getHealthRecordsListByCCCD = async ( token) => {
+export const getHealthRecordsListByCCCD = async (cccd, token) => {
   try {
     const headers = {};
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
-    const response = await axios.get(`${API_URL}/yba`, { headers });
+    // Gửi CCCD và token để server biết lấy hồ sơ của ai
+    const response = await axios.get(`${API_URL}/yba?cccd=${cccd}`, { headers });
     return response.data;
   } catch (error) {
     console.error("Error fetching health records:", error);

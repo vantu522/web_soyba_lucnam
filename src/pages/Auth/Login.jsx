@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Lock, Eye, EyeOff } from "lucide-react";
-import logo from "../../assets/logo.jpg"
+import logo from "../../assets/logo.jpg";
 
-const HealthRecordSearch = ({ onLogin, loading, error }) => {
+const Login = ({ onLogin, loading, error }) => {
   const [cccd, setCccd] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +15,7 @@ const HealthRecordSearch = ({ onLogin, loading, error }) => {
   };
 
   return (
-    <div className="min-h-full sm:min-h-screen bg-linear-to-br ">
+    <div className="min-h-full sm:min-h-screen bg-linear-to-br">
       <div className="container mx-auto px-2 sm:px-4 py-8 sm:py-12 md:py-16">
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <img
@@ -39,6 +39,7 @@ const HealthRecordSearch = ({ onLogin, loading, error }) => {
                   {error}
                 </div>
               )}
+              
               <div className="mb-4 sm:mb-6">
                 <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
                   Số CCCD
@@ -49,7 +50,7 @@ const HealthRecordSearch = ({ onLogin, loading, error }) => {
                     value={cccd}
                     onChange={(e) => setCccd(e.target.value)}
                     placeholder="Nhập số CCCD của bạn..."
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl  focus:ring-0 transition-colors"
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl focus:ring-0 transition-colors"
                   />
                 </div>
               </div>
@@ -64,7 +65,7 @@ const HealthRecordSearch = ({ onLogin, loading, error }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Nhập mật khẩu của bạn..."
-                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl  focus:ring-0 transition-colors pr-12"
+                    className="w-full px-4 sm:px-6 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl focus:ring-0 transition-colors pr-12"
                     onKeyPress={(e) => e.key === "Enter" && handleSubmit(e)}
                   />
                   <button
@@ -108,7 +109,7 @@ const HealthRecordSearch = ({ onLogin, loading, error }) => {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       ></path>
                     </svg>
-                    Đang tìm kiếm...
+                    Đang đăng nhập...
                   </div>
                 ) : (
                   <div className="flex items-center cursor-pointer justify-center">
@@ -117,6 +118,8 @@ const HealthRecordSearch = ({ onLogin, loading, error }) => {
                   </div>
                 )}
               </button>
+
+   
             </form>
           </div>
 
@@ -131,4 +134,4 @@ const HealthRecordSearch = ({ onLogin, loading, error }) => {
   );
 };
 
-export default HealthRecordSearch;
+export default Login;

@@ -21,11 +21,11 @@ import {
   formatMedicalDateTime,
 } from "../../utils/format";
 import PDFModalViewer from "../../components/PdfModal";
-const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
+
+const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
   const [detailData, setDetailData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   // Gọi API để lấy chi tiết khi component mount
   useEffect(() => {
@@ -331,7 +331,6 @@ const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
           </div>
 
           {/*  TÀI LIỆU ĐÍNH KÈM (PDF) */}
-
           {detailData?.pdfFiles && detailData.pdfFiles.length > 0 && (
             <PDFModalViewer files={detailData.pdfFiles} />
           )}
@@ -727,4 +726,4 @@ const HealthRecordDetail = ({ selectedRecord, token, onBack }) => {
   );
 };
 
-export default HealthRecordDetail;
+export default MedicalRecordDetail;
