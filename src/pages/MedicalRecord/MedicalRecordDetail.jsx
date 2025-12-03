@@ -384,7 +384,7 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
                             ]
                         ).map((item, index) => (
                           <tr key={index} className="hover:bg-gray-50">
-                            <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm font-medium text-blue-600 border-b">
+                            <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm font-medium text-green-600 border-b">
                               {item.STT || "N/A"}
                             </td>
                             <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm md:text-base text-gray-900 border-b">
@@ -471,7 +471,7 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
                             ]
                         ).map((item, index) => (
                           <tr key={index} className="hover:bg-gray-50">
-                            <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm font-medium text-blue-600 border-b">
+                            <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm font-medium text-green-600 border-b">
                               {item.STT || "N/A"}
                             </td>
                             <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm md:text-base text-gray-900 border-b">
@@ -567,7 +567,7 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
                             ]
                         ).map((item, index) => (
                           <tr key={index} className="hover:bg-gray-50">
-                            <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm font-medium text-blue-600 border-b">
+                            <td className="px-2 sm:px-4 py-2 sm:py-4 text-xs sm:text-sm font-medium text-green-600 border-b">
                               {item.STT || "N/A"}
                             </td>
 

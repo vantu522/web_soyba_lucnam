@@ -65,7 +65,7 @@ export default function PDFModalViewer({ files = [] }) {
               {/* Nút xem (Modal cho iOS/Desktop, redirect cho Android) */}
               <button
                 onClick={() => openModal(file.Url)}
-                className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg"
+                className="p-2 text-green-600 hover:bg-green-100 rounded-lg"
                 title="Xem PDF"
               >
                 <ExternalLink className="w-4 h-4" />
@@ -115,7 +115,7 @@ export default function PDFModalViewer({ files = [] }) {
                     href={pdfUrl} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
                   >
                     <Download className="w-4 h-4 mr-2" />
                     Tải xuống PDF

@@ -99,16 +99,16 @@ const PatientProfile = ({ patientInfo }) => {
           {/* Thời hạn từ ngày */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-2">Thời hạn thẻ BHYT (Từ ngày)</label>
-            <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-blue-900">{patientInfo.thoiHanTuNgay}</p>
+            <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+              <p className="text-green-900">{patientInfo.thoiHanTuNgay}</p>
             </div>
           </div>
 
           {/* Thời hạn đến ngày */}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-2">Thời hạn thẻ BHYT (Đến ngày)</label>
-            <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-blue-900">{patientInfo.thoiHanDenNgay}</p>
+            <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+              <p className="text-green-900">{patientInfo.thoiHanDenNgay}</p>
             </div>
           </div>
         </div>

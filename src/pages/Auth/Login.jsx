@@ -15,8 +15,8 @@ const Login = ({ onLogin, loading, error }) => {
   };
 
   return (
-    <div className="min-h-full sm:min-h-screen bg-linear-to-br">
-      <div className="container mx-auto px-2 sm:px-4 py-8 sm:py-12 md:py-16">
+    <div className="min-h-screen w-full ">
+      <div className="w-full h-full px-4 py-6 sm:py-8 md:py-12">
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <img
             src={logo}
@@ -31,8 +31,8 @@ const Login = ({ onLogin, loading, error }) => {
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto px-2 sm:px-4">
-          <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 border border-green-100">
+        <div className="max-w-2xl mx-auto px-4">
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 border border-emerald-100">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               {error && (
                 <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg text-sm sm:text-base">
@@ -85,7 +85,7 @@ const Login = ({ onLogin, loading, error }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 {loading ? (
                   <div className="flex items-center justify-center">

@@ -39,11 +39,11 @@ const Dashboard = ({
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center">
+      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
         <div className="text-center bg-white p-12 rounded-2xl shadow-2xl border border-gray-100">
           <div className="relative mb-8">
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-emerald-200 border-t-emerald-600 mx-auto"></div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-100 to-teal-100 opacity-20 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full bg-emerald-100 opacity-20 animate-pulse"></div>
           </div>
           <div className="space-y-3">
             <h3 className="text-xl font-semibold text-gray-800">Đang tải dữ liệu</h3>
@@ -60,11 +60,11 @@ const Dashboard = ({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex">
+    <div className="min-h-screen  flex">
       {/* Sidebar bên trái */}
       <div className="hidden md:flex md:w-80 bg-white shadow-xl border-r border-gray-100 flex-col">
         {/* Header sidebar */}
-        <div className="p-8 border-b border-gray-100 bg-gradient-to-r from-emerald-600 to-teal-600 text-white">
+        <div className="p-8 border-b border-gray-100 bg-emerald-600 text-white">
           <div className="flex items-center justify-center mb-6">
             <div className="relative">
               <img 
@@ -82,15 +82,15 @@ const Dashboard = ({
         </div>
 
         {/* Menu sidebar */}
-        <div className="flex-1 p-6 bg-gradient-to-b from-white to-gray-50">
+        <div className="flex-1 p-6 bg-gray-50">
           <h3 className="text-xs font-bold text-gray-500 uppercase mb-6 tracking-wider">CHỨC NĂNG CHÍNH</h3>
           <nav className="space-y-3">
             <button 
               onClick={() => setCurrentView("records")}
               className={`w-full flex items-center px-5 py-4 rounded-xl font-medium transition-all duration-200 ${
                 currentView === "records" 
-                  ? "text-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 border-l-4 border-emerald-500 shadow-md" 
-                  : "text-gray-600 hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 hover:text-gray-800 hover:shadow-sm"
+                  ? "text-emerald-700 bg-emerald-50 border-l-4 border-emerald-500 shadow-md" 
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-800 hover:shadow-sm"
               }`}
             >
               <ClipboardList className="w-5 h-5 mr-4" />
@@ -100,8 +100,8 @@ const Dashboard = ({
               onClick={() => setCurrentView("profile")}
               className={`w-full flex items-center px-5 py-4 rounded-xl font-medium transition-all duration-200 ${
                 currentView === "profile" 
-                  ? "text-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 border-l-4 border-emerald-500 shadow-md" 
-                  : "text-gray-600 hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 hover:text-gray-800 hover:shadow-sm"
+                  ? "text-emerald-700 bg-emerald-50 border-l-4 border-emerald-500 shadow-md" 
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-800 hover:shadow-sm"
               }`}
             >
               <IdCard className="w-5 h-5 mr-4" />
@@ -111,8 +111,8 @@ const Dashboard = ({
               onClick={() => setCurrentView("changePassword")}
               className={`w-full flex items-center px-5 py-4 rounded-xl font-medium transition-all duration-200 ${
                 currentView === "changePassword" 
-                  ? "text-emerald-700 bg-gradient-to-r from-emerald-50 to-teal-50 border-l-4 border-emerald-500 shadow-md" 
-                  : "text-gray-600 hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 hover:text-gray-800 hover:shadow-sm"
+                  ? "text-emerald-700 bg-emerald-50 border-l-4 border-emerald-500 shadow-md" 
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-800 hover:shadow-sm"
               }`}
             >
               <Lock className="w-5 h-5 mr-4" />
@@ -125,7 +125,7 @@ const Dashboard = ({
         <div className="p-6 border-t border-gray-100 bg-gray-50">
           <button
             onClick={onBack}
-            className="w-full flex items-center justify-center px-5 py-4 text-red-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 rounded-xl font-medium transition-all duration-200 hover:shadow-md border border-red-200 hover:border-red-300"
+            className="w-full flex items-center justify-center px-5 py-4 text-red-600 hover:bg-red-50 rounded-xl font-medium transition-all duration-200 hover:shadow-md border border-red-200 hover:border-red-300"
           >
             <LogOut className="w-5 h-5 mr-3" />
             <span>Đăng xuất</span>
@@ -137,7 +137,7 @@ const Dashboard = ({
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <div className="bg-white shadow-lg border-b-4 border-emerald-500">
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 py-6 px-6">
+          <div className="bg-emerald-600 py-6 px-6">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
               <div className="flex items-center">
                 <img src={logo} alt="Logo" className="w-14 h-14 mr-4 rounded-full border-2 border-white shadow-md md:hidden" />
@@ -153,12 +153,12 @@ const Dashboard = ({
                   <div className="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-sm">
                     <span className="text-xl">🔔</span>
                   </div>
-                  <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full text-xs text-white flex items-center justify-center font-bold shadow-lg">
+                  <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full text-xs text-white flex items-center justify-center font-bold shadow-lg notification-bounce">
                     0
                   </span>
                 </button>
                 <div className="hidden md:flex items-center space-x-4 bg-white/10 rounded-full px-4 py-2 backdrop-blur-sm">
-                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg status-online">
                     <User className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-white">
@@ -172,7 +172,7 @@ const Dashboard = ({
         </div>
 
         {/* Content area */}
-        <div className="flex-1 p-6 md:p-8 overflow-auto bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="flex-1 p-6 md:p-8 overflow-auto bg-emerald-50">
           <div className="max-w-7xl mx-auto">
             {/* Mobile navigation */}
             <div className="md:hidden mb-6">
@@ -226,9 +226,9 @@ const Dashboard = ({
             </div>
 
             {/* Dynamic content based on currentView */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden card-hover">
               {/* Content Header */}
-              <div className="bg-gradient-to-r from-emerald-50 to-teal-50 px-6 py-4 border-b border-gray-100">
+              <div className="bg-emerald-50 px-6 py-4 border-b border-gray-100">
                 <div className="flex items-center">
                   {currentView === "records" && <ClipboardList className="w-6 h-6 text-emerald-600 mr-3" />}
                   {currentView === "profile" && <IdCard className="w-6 h-6 text-emerald-600 mr-3" />}

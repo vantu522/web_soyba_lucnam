@@ -40,13 +40,13 @@
   animation: pulse-medical 2s infinite;
 }
 
-/* Gradient backgrounds */
+/* Solid medical backgrounds */
 .bg-medical-gradient {
-  background: linear-gradient(135deg, #10b981 0%, #14b8a6 50%, #06b6d4 100%);
+  background: #10b981; /* emerald-500 */
 }
 
 .bg-medical-light {
-  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #ecfeff 100%);
+  background: #ecfdf5; /* emerald-50 */
 }
 
 /* Card hover effects */
@@ -61,7 +61,7 @@
 
 /* Custom medical button styles */
 .btn-medical {
-  background: linear-gradient(135deg, #10b981, #14b8a6);
+  background: #10b981; /* emerald-500 */
   border: none;
   color: white;
   font-weight: 600;
@@ -74,7 +74,7 @@
 .btn-medical:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-  background: linear-gradient(135deg, #059669, #0d9488);
+  background: #059669; /* emerald-600 */
 }
 
 /* Loading animation enhancements */
