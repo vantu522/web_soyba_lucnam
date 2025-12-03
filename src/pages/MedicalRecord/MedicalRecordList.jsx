@@ -30,6 +30,8 @@ const MedicalRecordList = ({ healthRecords, onViewDetail }) => {
                 <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Ngày đón tiếp</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase hidden md:table-cell">Ngày ra viện</th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Kết luận</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Ngày hẹn khám</th>
+
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -38,7 +40,7 @@ const MedicalRecordList = ({ healthRecords, onViewDetail }) => {
                   <td className="px-4 py-3">
                     <button
                       onClick={() => handleViewDetail(record)}
-                      className="text-green-600 hover:text-green-700 font-medium text-sm"
+                      className="text-green-600 hover:text-green-700 font-medium cursor-pointer text-sm"
                     >
                       Xem
                     </button>
@@ -54,6 +56,8 @@ const MedicalRecordList = ({ healthRecords, onViewDetail }) => {
                     {record.NgayRaVien ? new Date(record.NgayRaVien).toLocaleDateString('vi-VN') : '-'}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900">{record.CHAN_DOAN_RV}</td>
+                  <td className="px-4 py-3 text-sm text-gray-900">{record.NgayRaVien}</td>
+
                 </tr>
               ))}
             </tbody>

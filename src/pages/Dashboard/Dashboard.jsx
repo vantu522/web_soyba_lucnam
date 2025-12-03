@@ -70,11 +70,9 @@ const Dashboard = ({
               <img 
                 src={logo} 
                 alt="Logo" 
-                className="w-20 h-20 rounded-full object-cover border-4 border-white shadow-lg" 
+                className="w-40 h-40 rounded-full object-cover border-4 border-white shadow-lg" 
               />
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-400 rounded-full border-2 border-white flex items-center justify-center">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-              </div>
+           
             </div>
           </div>
           <h2 className="text-center font-bold text-xl text-white mb-2">{patientName}</h2>
@@ -172,8 +170,8 @@ const Dashboard = ({
         </div>
 
         {/* Content area */}
-        <div className="flex-1 p-6 md:p-8 overflow-auto bg-emerald-50">
-          <div className="max-w-7xl mx-auto">
+        <div className="flex-1 md:p-8 overflow-auto bg-emerald-50">
+          <div className="max-w-full mx-auto">
             {/* Mobile navigation */}
             <div className="md:hidden mb-6">
               <div className="bg-white rounded-xl shadow-md p-4 border border-gray-100">
