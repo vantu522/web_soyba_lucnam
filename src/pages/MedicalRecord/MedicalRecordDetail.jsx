@@ -27,9 +27,9 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Gọi API để lấy chi tiết khi component mount
+  // Fake data để hiển thị trang
   useEffect(() => {
-    const fetchDetailData = async () => {
+    const loadFakeData = () => {
       if (!selectedRecord) {
         setError("Không có thông tin bản ghi được chọn");
         setLoading(false);
@@ -39,113 +39,168 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
       setLoading(true);
       setError(null);
 
-      try {
-        const response = await getHealthRecordByCCCDAndLK(
-          selectedRecord.MA_LK,
-          token
-        );
+      // Simulate API delay
+      setTimeout(() => {
+        const fakeDetailData = {
+          // Thông tin hành chính (XML1)
+          HO_TEN: "Nguyễn Văn Minh",
+          NGAY_SINH: "19900315",
+          GIOI_TINH: "1",
+          SO_CCCD: "024058010001",
+          DIEN_THOAI: "0987654321",
+          DIA_CHI: "123 Đường ABC, Phường XYZ, Quận 1, TP.HCM",
+          MA_THE_BHYT: "DN4010123456789",
+          MA_BN: "BN001234",
+          MA_LK: selectedRecord?.MA_LK || "LK001234",
+          NGAY_VAO: "20241201080000",
+          NGAY_RA: "20241205100000",
 
-        if (
-          response &&
-          response.success &&
-          response.data &&
-          Array.isArray(response.data)
-        ) {
-          // Tìm phần tử chứa NOIDUNGFILE (XML data) - thường là phần tử đầu tiên
-          const xmlDataItem = response.data.find(
-            (item) => item.NOIDUNGFILE && item.NOIDUNGFILE.GIAMDINHHS
-          );
-
-          if (
-            xmlDataItem &&
-            xmlDataItem.NOIDUNGFILE &&
-            xmlDataItem.NOIDUNGFILE.GIAMDINHHS
-          ) {
-            const hosoData =
-              xmlDataItem.NOIDUNGFILE.GIAMDINHHS.THONGTINHOSO.DANHSACHHOSO.HOSO;
-
-            const xml1File = hosoData.FILEHOSO.find(
-              (file) => file.LOAIHOSO === "XML1"
-            );
-            const xml2File = hosoData.FILEHOSO.find(
-              (file) => file.LOAIHOSO === "XML2"
-            );
-            const xml3File = hosoData.FILEHOSO.find(
-              (file) => file.LOAIHOSO === "XML3"
-            );
-            const xml4File = hosoData.FILEHOSO.find(
-              (file) => file.LOAIHOSO === "XML4"
-            );
-            const xml5File = hosoData.FILEHOSO.find(
-              (file) => file.LOAIHOSO === "XML5"
-            );
-
-            if (
-              xml1File &&
-              xml1File.NOIDUNGFILE &&
-              xml1File.NOIDUNGFILE.TONG_HOP
-            ) {
-              const processedData = {
-                // Thông tin hành chính từ XML1
-                ...xml1File.NOIDUNGFILE.TONG_HOP,
-                // Thông tin thuốc từ XML2
-                xml2Data:
-                  xml2File && xml2File.NOIDUNGFILE
-                    ? xml2File.NOIDUNGFILE
-                    : null,
-                // Thông tin DVKT/VTYT từ XML3
-                xml3Data:
-                  xml3File && xml3File.NOIDUNGFILE
-                    ? xml3File.NOIDUNGFILE
-                    : null,
-                // Thông tin dịch vụ cận lâm sàng từ XML4
-                xml4Data:
-                  xml4File && xml4File.NOIDUNGFILE
-                    ? xml4File.NOIDUNGFILE
-                    : null,
-                // Thông tin diễn biến lâm sàng từ XML5
-                xml5Data:
-                  xml5File && xml5File.NOIDUNGFILE
-                    ? xml5File.NOIDUNGFILE
-                    : null,
-              };
-
-              // Lưu các file PDF đính kèm
-              const pdfFiles = response.data.filter(
-                (item) => item.Url && item.TenNhom
-              );
-
-              setDetailData({
-                ...processedData,
-                pdfFiles: pdfFiles,
-              });
-              if (!detailData) {
-                toast.success("Tải chi tiết hồ sơ thành công");
+          // Thông tin thuốc (XML2)
+          xml2Data: {
+            CHITIEU_CHITIET_THUOC: {
+              DSACH_CHI_TIET_THUOC: {
+                CHI_TIET_THUOC: [
+                  {
+                    STT: "1",
+                    TEN_THUOC: "Paracetamol 500mg",
+                    LIEU_DUNG: "1 viên x 3 lần/ngày",
+                    SO_LUONG: "30"
+                  },
+                  {
+                    STT: "2", 
+                    TEN_THUOC: "Amoxicillin 250mg",
+                    LIEU_DUNG: "1 viên x 2 lần/ngày",
+                    SO_LUONG: "14"
+                  },
+                  {
+                    STT: "3",
+                    TEN_THUOC: "Vitamin C 1000mg",
+                    LIEU_DUNG: "1 viên x 1 lần/ngày",
+                    SO_LUONG: "10"
+                  }
+                ]
               }
-            } else {
-              throw new Error("Không tìm thấy dữ liệu XML1");
             }
-          } else {
-            throw new Error("Cấu trúc dữ liệu không đúng");
-          }
-        } else {
-          setError("Không tìm thấy chi tiết hồ sơ");
-          toast.error("Không tìm thấy chi tiết hồ sơ");
-        }
-      } catch (err) {
-        console.error("Error fetching detail:", err);
-        const errorMessage =
-          err.response?.data?.message ||
-          err.message ||
-          "Có lỗi xảy ra khi tải chi tiết hồ sơ";
-        setError(errorMessage);
-        toast.error(errorMessage);
-      } finally {
+          },
+
+          // Thông tin DVKT/VTYT (XML3)
+          xml3Data: {
+            CHITIEU_CHITIET_DVKT_VTYT: {
+              DSACH_CHI_TIET_DVKT: {
+                CHI_TIET_DVKT: [
+                  {
+                    STT: "1",
+                    TEN_DICH_VU: "Siêu âm bụng tổng quát",
+                    SO_LUONG: "1",
+                    DON_VI_TINH: "lần"
+                  },
+                  {
+                    STT: "2",
+                    TEN_DICH_VU: "Chụp X-quang phổi thẳng",
+                    SO_LUONG: "1", 
+                    DON_VI_TINH: "lần"
+                  },
+                  {
+                    STT: "3",
+                    TEN_VAT_TU: "Băng gạc y tế",
+                    SO_LUONG: "5",
+                    DON_VI_TINH: "cuộn"
+                  }
+                ]
+              }
+            }
+          },
+
+          // Thông tin dịch vụ cận lâm sàng (XML4)
+          xml4Data: {
+            CHITIEU_CHITIET_DICHVUCANLAMSANG: {
+              DSACH_CHI_TIET_CLS: {
+                CHI_TIET_CLS: [
+                  {
+                    STT: "1",
+                    MA_CHI_SO: "WBC",
+                    TEN_CHI_SO: "Bạch cầu",
+                    GIA_TRI: "8.5",
+                    DON_VI_DO: "10^9/L",
+                    MO_TA: "Số lượng bạch cầu trong máu",
+                    KET_LUAN: "Bình thường",
+                    NGAY_KQ: "20241202090000"
+                  },
+                  {
+                    STT: "2",
+                    MA_CHI_SO: "RBC", 
+                    TEN_CHI_SO: "Hồng cầu",
+                    GIA_TRI: "4.2",
+                    DON_VI_DO: "10^12/L",
+                    MO_TA: "Số lượng hồng cầu trong máu",
+                    KET_LUAN: "Bình thường",
+                    NGAY_KQ: "20241202090000"
+                  },
+                  {
+                    STT: "3",
+                    MA_CHI_SO: "GLU",
+                    TEN_CHI_SO: "Glucose máu",
+                    GIA_TRI: "95",
+                    DON_VI_DO: "mg/dL",
+                    MO_TA: "Nồng độ đường trong máu",
+                    KET_LUAN: "Bình thường", 
+                    NGAY_KQ: "20241202090000"
+                  }
+                ]
+              }
+            }
+          },
+
+          // Thông tin diễn biến lâm sàng (XML5)
+          xml5Data: {
+            CHITIEU_CHITIET_DIENBIENLAMSANG: {
+              DSACH_CHI_TIET_DIEN_BIEN_BENH: {
+                CHI_TIET_DIEN_BIEN_BENH: [
+                  {
+                    THOI_DIEM_DBLS: "20241201080000",
+                    DIEN_BIEN_LS: "Bệnh nhân nhập viện với triệu chứng đau bụng, sốt nhẹ.\nThăm khám: \n- Mạch: 80 lần/phút\n- Nhiệt độ: 37.5°C\n- Huyết áp: 120/80 mmHg\n- Bụng mềm, đau nhẹ vùng hạ vị",
+                    GIAI_DOAN_BENH: "Giai đoạn cấp tính",
+                    HOI_CHAN: "Không",
+                    PHAU_THUAT: "Không",
+                    NGUOI_THUC_HIEN: "BS. Trần Văn A"
+                  },
+                  {
+                    THOI_DIEM_DBLS: "20241203100000",
+                    DIEN_BIEN_LS: "Bệnh nhân có tiến triển tốt sau 2 ngày điều trị.\n- Sốt giảm\n- Đau bụng giảm nhiều\n- Ăn uống được\n- Tinh thần tỉnh táo",
+                    GIAI_DOAN_BENH: "Giai đoạn hồi phục",
+                    HOI_CHAN: "Không",
+                    PHAU_THUAT: "Không", 
+                    NGUOI_THUC_HIEN: "BS. Nguyễn Thị B"
+                  }
+                ]
+              }
+            }
+          },
+
+          // File PDF đính kèm
+          pdfFiles: [
+            {
+              TenNhom: "Kết quả xét nghiệm",
+              Url: "https://example.com/xet-nghiem.pdf"
+            },
+            {
+              TenNhom: "Kết quả chẩn đoán hình ảnh", 
+              Url: "https://example.com/chan-doan-hinh-anh.pdf"
+            },
+            {
+              TenNhom: "Tờ điều trị",
+              Url: "https://example.com/to-dieu-tri.pdf"
+            }
+          ]
+        };
+
+        setDetailData(fakeDetailData);
+        toast.success("Tải chi tiết hồ sơ thành công");
         setLoading(false);
-      }
+      }, 1500); // Simulate 1.5s loading time
     };
 
-    fetchDetailData();
+    loadFakeData();
   }, [selectedRecord]);
 
   // Loading state
