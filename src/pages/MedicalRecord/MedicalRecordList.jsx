@@ -9,15 +9,10 @@ const MedicalRecordList = ({ healthRecords, onViewDetail }) => {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200">
       <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-        <h2 className="text-lg font-semibold text-gray-800">Danh sách đợt điều trị</h2>
-        <div className="flex space-x-2">
-          <button className="px-3 py-1.5 text-sm bg-purple-100 text-purple-700 rounded hover:bg-purple-200">
-            Hiển thị toàn bộ
-          </button>
-          <button className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200">
-            Chọn cột
-          </button>
-        </div>
+        <h2 className="text-lg font-semibold text-gray-800">
+          Danh sách đợt điều trị
+        </h2>
+
       </div>
 
       {healthRecords?.length > 0 ? (
@@ -25,13 +20,28 @@ const MedicalRecordList = ({ healthRecords, onViewDetail }) => {
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">#</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">STT</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Ngày đón tiếp</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase hidden md:table-cell">Ngày ra viện</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Kết luận</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Ngày hẹn khám</th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  #
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  STT
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Mã lần khám
+                </th>
 
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Ngày đón tiếp
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase hidden md:table-cell">
+                  Ngày ra viện
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Kết luận
+                </th>
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Ngày hẹn tái khám
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -45,19 +55,35 @@ const MedicalRecordList = ({ healthRecords, onViewDetail }) => {
                       Xem
                     </button>
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{index + 1}</td>
                   <td className="px-4 py-3 text-sm text-gray-900">
-                    {new Date(record.NgayTao).toLocaleTimeString('vi-VN', { 
-                      hour: '2-digit', 
-                      minute: '2-digit' 
-                    })}, {new Date(record.NgayTao).toLocaleDateString('vi-VN')}
+                    {index + 1}
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-900 hidden md:table-cell">
-                    {record.NgayRaVien ? new Date(record.NgayRaVien).toLocaleDateString('vi-VN') : '-'}
+                    {record.NgayRaVien
+                      ? new Date(record.NgayRaVien).toLocaleDateString("vi-VN")
+                      : "---"}
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{record.CHAN_DOAN_RV}</td>
-                  <td className="px-4 py-3 text-sm text-gray-900">{record.NgayRaVien}</td>
 
+                  <td className="px-4 py-3 text-sm text-gray-900">
+                    {new Date(record.NgayTao).toLocaleTimeString("vi-VN", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                    , {new Date(record.NgayTao).toLocaleDateString("vi-VN")}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-gray-900 hidden md:table-cell">
+                    {record.NgayRaVien
+                      ? new Date(record.NgayRaVien).toLocaleDateString("vi-VN")
+                      : "---"}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-gray-900">
+                    {record.CHAN_DOAN_RV}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-gray-900 hidden md:table-cell">
+                    {record.NgayRaVien
+                      ? new Date(record.NgayRaVien).toLocaleDateString("vi-VN")
+                      : "---"}
+                  </td>
                 </tr>
               ))}
             </tbody>

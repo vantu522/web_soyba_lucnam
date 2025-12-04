@@ -148,15 +148,10 @@ const Dashboard = ({
               </div>
               <div className="flex items-center space-x-6">
                 <button className="relative group">
-                  <div className="w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-sm">
-                    <span className="text-xl">🔔</span>
-                  </div>
-                  <span className="absolute -top-1 -right-1 w-6 h-6 bg-red-500 rounded-full text-xs text-white flex items-center justify-center font-bold shadow-lg notification-bounce">
-                    0
-                  </span>
+                 
                 </button>
                 <div className="hidden md:flex items-center space-x-4 bg-white/10 rounded-full px-4 py-2 backdrop-blur-sm">
-                  <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg status-online">
+                  <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg status-online">
                     <User className="w-6 h-6 text-white" />
                   </div>
                   <div className="text-white">

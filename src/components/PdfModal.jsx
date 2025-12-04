@@ -50,26 +50,20 @@ export default function PDFModalViewer({ files = [] }) {
         {files.map((file, index) => (
           <div
             key={index}
-            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-pink-500 hover:bg-pink-50 transition-all group"
+            className="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-pink-500 hover:bg-pink-50 transition-all group cursor-pointer"
+            onClick={() => openModal(file.Url)}
           >
+            
             <div className="shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-200 transition-colors">
-              <Download className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600" />
+              <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600" />
             </div>
             <div className="ml-3 flex-1 min-w-0">
               <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">{file.TenNhom}</p>
               <p className="text-xs text-gray-500 mt-1">
-                {new Date(file.NgayTao).toLocaleDateString("vi-VN")}
+                {file.NgayTao ? new Date(file.NgayTao).toLocaleDateString("vi-VN") : "Chưa có ngày tạo"}
               </p>
             </div>
             <div className="flex gap-2 ml-2">
-              {/* Nút xem (Modal cho iOS/Desktop, redirect cho Android) */}
-              <button
-                onClick={() => openModal(file.Url)}
-                className="p-2 text-green-600 hover:bg-green-100 rounded-lg"
-                title="Xem PDF"
-              >
-                <ExternalLink className="w-4 h-4" />
-              </button>
               {/* Nút tải xuống */}
               <a
                 href={file.Url}

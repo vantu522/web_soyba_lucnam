@@ -88,6 +88,14 @@ const PatientProfile = ({ patientInfo }) => {
             </div>
           </div>
 
+             {/* Thời hạn từ ngày */}
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-2">Thời hạn thẻ BHYT (Từ ngày)</label>
+            <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+              <p className="text-green-900">{patientInfo.thoiHanTuNgay} - {patientInfo.thoiHanDenNgay}</p>
+            </div>
+          </div>
+
           {/* Nơi ĐKKCB */}
           <div className="md:col-span-2">
             <label className="block text-sm font-medium text-gray-600 mb-2">Nơi đăng ký KCB ban đầu</label>
@@ -96,21 +104,8 @@ const PatientProfile = ({ patientInfo }) => {
             </div>
           </div>
 
-          {/* Thời hạn từ ngày */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600 mb-2">Thời hạn thẻ BHYT (Từ ngày)</label>
-            <div className="p-3 bg-green-50 rounded-lg border border-green-200">
-              <p className="text-green-900">{patientInfo.thoiHanTuNgay}</p>
-            </div>
-          </div>
+       
 
-          {/* Thời hạn đến ngày */}
-          <div>
-            <label className="block text-sm font-medium text-gray-600 mb-2">Thời hạn thẻ BHYT (Đến ngày)</label>
-            <div className="p-3 bg-green-50 rounded-lg border border-green-200">
-              <p className="text-green-900">{patientInfo.thoiHanDenNgay}</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
