@@ -42,25 +42,33 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
       // Simulate API delay
       setTimeout(() => {
         const fakeDetailData = {
-         
-
-        
-
           // File PDF đính kèm
           pdfFiles: [
             {
               TenNhom: "Bảng kê bảo hiểm ngoại trú",
-              Url: "https://example.com/xet-nghiem.pdf"
+              Url: "https://example.com/xet-nghiem.pdf",
             },
             {
-              TenNhom: "Bảng kê bảo hiểm nội trú", 
-              Url: "https://example.com/chan-doan-hinh-anh.pdf"
+              TenNhom: "Bảng kê bảo hiểm nội trú",
+              Url: "https://example.com/chan-doan-hinh-anh.pdf",
             },
             {
               TenNhom: "Đơn thuốc",
-              Url: "https://example.com/to-dieu-tri.pdf"
-            }
-          ]
+              Url: "https://example.com/to-dieu-tri.pdf",
+            },
+            {
+              TenNhom: "Xét nghiệm",
+              Url: "https://example.com/to-dieu-tri.pdf",
+            },
+            {
+              TenNhom: "Siêu âm",
+              Url: "https://example.com/to-dieu-tri.pdf",
+            },
+            {
+              TenNhom: "Chụp X-quang",
+              Url: "https://example.com/to-dieu-tri.pdf",
+            },
+          ],
         };
 
         setDetailData(fakeDetailData);
@@ -146,7 +154,6 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
         </div>
 
         <div className="space-y-4 sm:space-y-6 md:space-y-8">
-         
           {/* PHIẾU KẾT QUẢ KHÁM BỆNH (PDF) */}
           {detailData?.pdfFiles && detailData.pdfFiles.length > 0 && (
             <div className="bg-white rounded-lg sm:rounded-xl shadow-md border border-gray-100">
@@ -163,8 +170,6 @@ const MedicalRecordDetail = ({ selectedRecord, token, onBack }) => {
               </div>
             </div>
           )}
-
-        
         </div>
       </div>
     </div>
