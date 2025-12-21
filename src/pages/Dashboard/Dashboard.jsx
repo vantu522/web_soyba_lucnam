@@ -76,7 +76,7 @@ const Dashboard = ({
             </div>
           </div>
           <h2 className="text-center font-bold text-xl text-white mb-2">{patientName}</h2>
-          <p className="text-center text-emerald-100 text-sm">Sổ sức khỏe điện tử</p>
+          <p className="text-center text-xl">Sổ sức khỏe điện tử</p>
         </div>
 
         {/* Menu sidebar */}
